@@ -7,4 +7,4 @@ const blueColor = Color.fromARGB(0, 149, 246, 1);
 const primaryColor = Colors.white;
 const secondaryColor = Colors.grey;
 const textColorOne = Colors.black;
-const redColor = Colors.red;
+const redColor = Color.fromARGB(255, 205, 55, 44);
