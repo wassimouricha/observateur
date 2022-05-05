@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "27801334673",
+    "project_id": "observateur-79208",
+    "storage_bucket": "observateur-79208.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:27801334673:android:7b45f26761cc794a47e030",
+        "android_client_info": {
+          "package_name": "com.example.observateur"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "27801334673-itt1tq0g76vcoq679ghf66ks7k4u0rei.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB48MLWSn-kThpKZO2G_Y_xfPe8tah2Tfg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "27801334673-itt1tq0g76vcoq679ghf66ks7k4u0rei.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
