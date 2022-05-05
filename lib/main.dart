@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:observateur/utils/colors.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,8 +14,10 @@ class MyApp extends StatelessWidget {
     return  MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "L'Observateur",
-      theme: ThemeData.dark(),
-      home:  Scaffold(body: Text("L'observateur")),
+      theme: ThemeData.dark().copyWith(
+        scaffoldBackgroundColor: mobileBackgroundColor
+      ),
+      home:  const Scaffold(body: Text("L'observateur")),
     );
   }
 }
