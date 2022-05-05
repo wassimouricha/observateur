@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:observateur/screens/login_screen.dart';
 import 'package:observateur/splash_screen.dart';
 import 'package:observateur/utils/colors.dart';
 
@@ -37,7 +38,8 @@ class MyApp extends StatelessWidget {
       title: "L'Observateur",
       theme: ThemeData.dark()
           .copyWith(scaffoldBackgroundColor: mobileBackgroundColor),
-      home: const SplashScreen(),
+      // home: const SplashScreen(),
+      home: const LoginScreen(),
     );
   }
 }
