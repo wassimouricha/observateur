@@ -138,9 +138,7 @@ class _BottomPart extends StatelessWidget {
               child: GestureDetector(
                 onTap: () => Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
-                        builder: (context) =>   const ResponsiveLayout(
-                          mobileScreenLayout: MobileScreenLayout() , 
-                          webScreenLayout: WebScreenLayout() ,))),
+                        builder: (context) =>   const ResponsiveLayout(mobileScreenLayout: MobileScreenLayout() , webScreenLayout: WebScreenLayout() ,))),
                 child: Container(
                   height: 85.0,
                   width: 85.0,
