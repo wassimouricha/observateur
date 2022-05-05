@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:observateur/splash_screen.dart';
 import 'package:observateur/utils/colors.dart';
 
 void main() {
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: mobileBackgroundColor
       ),
-      home:  const Scaffold(body: Text("L'observateur")),
+      home:  const SplashScreen(),
     );
   }
 }
