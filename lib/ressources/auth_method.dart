@@ -31,7 +31,8 @@ class AuthMethods {
         // ignore: avoid_print
         print(cred.user!.uid);
 
-        String photoUrl = await StorageMethods().uploadImageToStorage("profilePics", file, false);
+        String photoUrl = await StorageMethods()
+            .uploadImageToStorage("profilePics", file, false);
 
         // ajouter l'utilisateur a notre base de donnée
         await _firestore.collection("users").doc(cred.user!.uid).set({
@@ -41,7 +42,7 @@ class AuthMethods {
           "bio": bio,
           "followers": [],
           "following": [],
-          "photoUrl" : photoUrl,
+          "photoUrl": photoUrl,
         });
 
         // //
@@ -51,7 +52,9 @@ class AuthMethods {
 
         res = "success";
       }
-    } catch (err) {
+    } 
+    
+     catch (err) {
       res = err.toString();
     }
     return res;

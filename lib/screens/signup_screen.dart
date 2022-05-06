@@ -1,4 +1,3 @@
-
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
@@ -24,6 +23,7 @@ class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController _bioController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
   Uint8List? _image;
+  bool _isLoading = false;
 
   @override //créer un state object qui ne sera jamais build plus tard
   void dispose() {
@@ -39,6 +39,31 @@ class _SignupScreenState extends State<SignupScreen> {
     setState(() {
       _image = im;
     });
+  }
+
+  void signUpUser() async {
+    setState(() {
+      _isLoading = true;
+    });
+    String res = await AuthMethods().signUpUser(
+      email: _emailController.text,
+      password: _passwordController.text,
+      username: _usernameController.text,
+      bio: _bioController.text,
+      file: _image!,
+    );
+
+    // ignore: avoid_print
+    print(res);
+        setState(() {
+      _isLoading = false;
+    });
+
+    if (res != "success") {
+      showSnackBar(res, context);
+    }  
+  
+    
   }
 
   @override
@@ -64,14 +89,16 @@ class _SignupScreenState extends State<SignupScreen> {
                     //circular widget pour accepter ete montrer le file selector pour l'avatar
                     Stack(
                       children: [
-                       _image != null ? CircleAvatar(
-                          radius: 64,
-                          backgroundImage: MemoryImage(_image!),
-                        ) : const CircleAvatar(
-                          radius: 64,
-                          backgroundImage: NetworkImage(
-                              "https://soccerpointeclaire.com/wp-content/uploads/2021/06/default-profile-pic-e1513291410505.jpg"),
-                        ),
+                        _image != null
+                            ? CircleAvatar(
+                                radius: 64,
+                                backgroundImage: MemoryImage(_image!),
+                              )
+                            : const CircleAvatar(
+                                radius: 64,
+                                backgroundImage: NetworkImage(
+                                    "https://soccerpointeclaire.com/wp-content/uploads/2021/06/default-profile-pic-e1513291410505.jpg"),
+                              ),
                         Positioned(
                           bottom: 0,
                           left: 80,
@@ -134,20 +161,9 @@ class _SignupScreenState extends State<SignupScreen> {
 
                     //bouton login
                     InkWell(
-                      onTap: () async {
-                        String res = await AuthMethods().signUpUser(
-                          email: _emailController.text,
-                          password: _passwordController.text,
-                          username: _usernameController.text,
-                          bio: _bioController.text,
-                          file: _image!,
-                        );
-
-                        // ignore: avoid_print
-                        print(res);
-                      },
-                      child: Container(
-                        child: Text(
+                      onTap: signUpUser,
+                      child:  Container(
+                        child: _isLoading ? Center(child: CircularProgressIndicator(),) : Text(
                           "Inscrivez-vous",
                           style: GoogleFonts.poppins(
                             fontSize: 19,
