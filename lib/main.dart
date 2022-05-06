@@ -36,8 +36,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "L'Observateur",
-      theme: ThemeData.dark()
-          .copyWith(scaffoldBackgroundColor: mobileBackgroundColor),
       // home: const SplashScreen(),
       home: const LoginScreen(),
     );
