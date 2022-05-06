@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:observateur/screens/login_screen.dart';
 import 'package:observateur/splash_screen.dart';
-import 'package:observateur/utils/colors.dart';
+
 
 
 // bien respecter l'odre du code sinon l'application ne se lance pas 

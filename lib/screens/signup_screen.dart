@@ -46,6 +46,19 @@ class _SignupScreenState extends State<SignupScreen> {
             const SizedBox(
               height: 64,
             ),  
+          //circular widget pour accepter ete montrer le file selector pour l'avatar
+          Stack(
+            children: [
+              CircleAvatar(
+                radius: 64,
+                backgroundImage: NetworkImage("https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80"),
+
+              ),
+            ],
+          ),
+             const SizedBox(
+              height: 24,
+            ),  
              //text field input pour le nom d'utilisateur
               TextFieldInput(
               hinText: "Entrez votre Nom d'utilisateur ",
