@@ -2,6 +2,9 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:observateur/responsive/mobileScreenLayout.dart';
+import 'package:observateur/responsive/responsive_layout_screen.dart';
+import 'package:observateur/responsive/webScreenLayout.dart';
 import 'package:observateur/ressources/auth_method.dart';
 import 'package:observateur/screens/login_screen.dart';
 
@@ -55,15 +58,26 @@ class _SignupScreenState extends State<SignupScreen> {
 
     // ignore: avoid_print
     print(res);
-        setState(() {
+    setState(() {
       _isLoading = false;
     });
 
     if (res != "success") {
       showSnackBar(res, context);
-    }  
-  
-    
+    } else {
+      Navigator.of(context)
+          .pushReplacement(MaterialPageRoute(builder: (context) =>  const ResponsiveLayout(
+            webScreenLayout: WebScreenLayout(), 
+            mobileScreenLayout: MobileScreenLayout()
+            ),
+            ),
+            );
+    }
+  }
+
+  void navigateToLogin() {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => const LoginScreen()));
   }
 
   @override
@@ -162,14 +176,18 @@ class _SignupScreenState extends State<SignupScreen> {
                     //bouton login
                     InkWell(
                       onTap: signUpUser,
-                      child:  Container(
-                        child: _isLoading ? Center(child: CircularProgressIndicator(),) : Text(
-                          "Inscrivez-vous",
-                          style: GoogleFonts.poppins(
-                            fontSize: 19,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
+                      child: Container(
+                        child: _isLoading
+                            ? const Center(
+                                child: CircularProgressIndicator(),
+                              )
+                            : Text(
+                                "Inscrivez-vous",
+                                style: GoogleFonts.poppins(
+                                  fontSize: 19,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
                         width: double.infinity,
                         alignment: Alignment.center,
                         padding: const EdgeInsets.symmetric(vertical: 12),
@@ -200,12 +218,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           width: 5,
                         ),
                         GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const LoginScreen()));
-                          },
+                          onTap: navigateToLogin,
                           child: Container(
                             child: Text(
                               "Connectez-vous !",

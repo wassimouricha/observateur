@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:observateur/responsive/mobileScreenLayout.dart';
+import 'package:observateur/responsive/responsive_layout_screen.dart';
+import 'package:observateur/responsive/webScreenLayout.dart';
 import 'package:observateur/ressources/auth_method.dart';
-import 'package:observateur/screens/home_screen.dart';
 import 'package:observateur/screens/signup_screen.dart';
 import 'package:observateur/utils/colors.dart';
 import 'package:observateur/utils/utils.dart';
@@ -40,13 +42,23 @@ class _LoginScreenState extends State<LoginScreen> {
     });
 
     if (res == "success") {
-      Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const HomeScreen()));
-      //
+       Navigator.of(context)
+          .pushReplacement(MaterialPageRoute(builder: (context) =>  const ResponsiveLayout(
+            webScreenLayout: WebScreenLayout(), 
+            mobileScreenLayout: MobileScreenLayout()
+            ),
+            ),
+            );
+
     } else {
       //snackbar
       showSnackBar(res, context);
     }
+  }
+
+  void navigateToSignUp() {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => const SignupScreen()));
   }
 
   @override
@@ -135,12 +147,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   width: 5,
                 ),
                 GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const SignupScreen()));
-                  },
+                  onTap: navigateToSignUp,
                   child: Container(
                     child: Text(
                       "Inscrivez-vous !",

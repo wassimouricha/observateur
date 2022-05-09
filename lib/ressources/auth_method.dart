@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:observateur/models/user.dart' as model;
 import 'package:observateur/ressources/storage_method.dart';
 
 class AuthMethods {
@@ -34,16 +35,19 @@ class AuthMethods {
         String photoUrl = await StorageMethods()
             .uploadImageToStorage("profilePics", file, false);
 
+        model.User user = model.User(
+             username: username,
+          uid: cred.user!.uid,
+          email: email,
+          bio: bio,
+          followers: [],
+          following: [],
+          photoUrl: photoUrl,
+
+        );
+
         // ajouter l'utilisateur a notre base de donnée
-        await _firestore.collection("users").doc(cred.user!.uid).set({
-          "username": username,
-          "uid": cred.user!.uid,
-          "email": email,
-          "bio": bio,
-          "followers": [],
-          "following": [],
-          "photoUrl": photoUrl,
-        });
+        await _firestore.collection("users").doc(cred.user!.uid).set(user.toJson(),);
 
         // //
         // await _firestore.collection("users").add({
