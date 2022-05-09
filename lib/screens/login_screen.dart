@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:observateur/ressources/auth_method.dart';
+import 'package:observateur/screens/home_screen.dart';
 import 'package:observateur/screens/signup_screen.dart';
 import 'package:observateur/utils/colors.dart';
 import 'package:observateur/utils/utils.dart';
@@ -18,7 +19,6 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _passwordController = TextEditingController();
   bool _isLoading = false;
 
-
   @override //créer un state object qui ne sera jamais build plus tard
   void dispose() {
     super.dispose();
@@ -27,19 +27,21 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void loginUser() async {
-     setState(() {
+    setState(() {
       _isLoading = true;
     });
     String res = await AuthMethods().loginUser(
         email: _emailController.text, password: _passwordController.text);
 
-        // ignore: avoid_print
-        print(res);
-        setState(() {
+    // ignore: avoid_print
+    print(res);
+    setState(() {
       _isLoading = false;
     });
 
     if (res == "success") {
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const HomeScreen()));
       //
     } else {
       //snackbar
@@ -89,13 +91,17 @@ class _LoginScreenState extends State<LoginScreen> {
             InkWell(
               onTap: loginUser,
               child: Container(
-                child:  _isLoading ? const Center(child: CircularProgressIndicator(),)  : Text(
-                  "Connectez-vous",
-                  style: GoogleFonts.poppins(
-                    fontSize: 19,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
+                child: _isLoading
+                    ? const Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : Text(
+                        "Connectez-vous",
+                        style: GoogleFonts.poppins(
+                          fontSize: 19,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
                 width: double.infinity,
                 alignment: Alignment.center,
                 padding: const EdgeInsets.symmetric(vertical: 12),
